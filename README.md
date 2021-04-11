@@ -94,7 +94,10 @@ At this point 4 terminals would be running.
 # Debugging
 
 1. Port number issue shows up frequently
-- To fix the issue use the property admin.serverPort in the "zoo.cfg" file to set any different port: admin.serverPort=8081 but be sure that the port 8081 in the example is not used.
+- To fix the issue use the property admin.serverPort in the "zoo.cfg" file to set any different 
+port: admin.serverPort=8081 but be sure that the port 8081 in the example is not used.
+
+2. https://stackoverflow.com/questions/56465830/failed-to-construct-kafka-producer-with-springboot
 ```
 
 ## Reference Commands
