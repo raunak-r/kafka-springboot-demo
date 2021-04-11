@@ -107,3 +107,11 @@ bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-f
 
 bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
 ```
+
+## API's
+API - POST - localhost:8080/api/kafka
+    PAYLOAD - 
+{
+"field1":"new-cons",
+"field2":"testing"
+}

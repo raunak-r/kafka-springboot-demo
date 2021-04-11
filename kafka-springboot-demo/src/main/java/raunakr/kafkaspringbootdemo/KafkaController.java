@@ -1,11 +1,9 @@
 package raunakr.kafkaspringbootdemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/kafka")
@@ -29,9 +27,12 @@ public class KafkaController {
         /*
         A dataModel will be sent to the kafka-broker object via the privately declared variable above.
          */
-        System.out.println(dataModel.getField1());
-        System.out.println(dataModel.getField2());
+        System.out.println(dataModel.toString());
         kafkaTemplate.send("topic1", dataModel);
     }
 
+    @KafkaListener(topics= "topic1")
+    public void getFromKafka(DataModel dataModel){
+        System.out.println(dataModel.toString());
+    }
 }

@@ -26,4 +26,12 @@ public class DataModel {
     public void setField2(String field2) {
         this.field2 = field2;
     }
+
+    @Override
+    public String toString() {
+        return "DataModel{" +
+                "field1='" + field1 + '\'' +
+                ", field2='" + field2 + '\'' +
+                '}';
+    }
 }

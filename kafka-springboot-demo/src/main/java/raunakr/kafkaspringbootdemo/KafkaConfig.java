@@ -1,20 +1,22 @@
 package raunakr.kafkaspringbootdemo;
 
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.*;
+import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EnableKafka
+@EnableKafka // to listen to kafka events
 public class KafkaConfig {
 
     @Bean
@@ -35,7 +37,30 @@ public class KafkaConfig {
     public KafkaTemplate<String, DataModel> kafkaTemplate(){
         /*
         A kafkaTemplate is basically the main method to return the kafka-broker object which can be used elsewhere.
+        This is a producer config bean.
          */
         return new KafkaTemplate<>(producerFactory());
     }
+
+    @Bean
+    public ConsumerFactory<String, DataModel> consumerFactory(){
+        Map<String, Object> config = new HashMap<>();
+
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "test-consumer-group-config");
+
+        return  new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), new JsonDeserializer<>(DataModel.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory kafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, DataModel> concurrentKafkaListenerContainerFactory
+                = new ConcurrentKafkaListenerContainerFactory<>();
+
+        concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory());
+        return concurrentKafkaListenerContainerFactory;
+    }
+
 }
