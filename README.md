@@ -33,7 +33,9 @@ Read about
 
 # Open cmd in the parent folder
 bin\run-nifi.bat
-http://localhost:8080/nifi/
+http://localhost:8082/nifi/
+
+PORT NUMBER - 8082
 ```
 
 ### Kafka + Zookeeper
@@ -48,6 +50,10 @@ http://localhost:8080/nifi/
 
 1. zookeeper server - bin\windows\zookeeper-server-start.bat config\zookeeper.properties
 2. kafka - bin\windows\kafka-server-start.bat config\server.properties
+
+PORT NUMBER - 
+LISTENER - 9092
+BROKER - 2181
 
 # References - Not needed to be used
 - In zookeeper folder server - bin\zkServer.cmd
@@ -98,6 +104,9 @@ At this point 4 terminals would be running.
 port: admin.serverPort=8081 but be sure that the port 8081 in the example is not used.
 
 2. https://stackoverflow.com/questions/56465830/failed-to-construct-kafka-producer-with-springboot
+
+3. Logs in ExecuteScripts
+https://stackoverflow.com/a/63257708/8110072
 ```
 
 ## Reference Commands
