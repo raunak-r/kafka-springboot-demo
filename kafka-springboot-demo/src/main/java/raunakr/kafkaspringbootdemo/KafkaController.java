@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import raunakr.kafkaspringbootdemo.esper.EsperEventHandler;
 
 @RestController
 @RequestMapping("/api/kafka")
@@ -13,6 +14,10 @@ public class KafkaController {
     private static final Logger logging = LoggerFactory.getLogger(KafkaController.class);
 
     private KafkaTemplate<String, DataModel> kafkaTemplate; // create a object of kafka-broker to send and receive msg
+
+    /** EsperEventHandler - wraps the Esper engine and processes the Events  */
+    @Autowired
+    private EsperEventHandler esperEventHandler;
 
     @Autowired
     public KafkaController(KafkaTemplate<String, DataModel> kafkaTemplate){
@@ -41,5 +46,6 @@ public class KafkaController {
          * */
 
         logging.info("Kafka Consumer Triggered - Received Data -> " + dataModel.toString());
+        esperEventHandler.handle(dataModel);
     }
 }
