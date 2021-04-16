@@ -39,7 +39,7 @@ public class KafkaController {
         kafkaTemplate.send("topic1", dataModel);
     }
 
-    @KafkaListener(topics= "topic1")    // comment this line to stop kafka listening.
+//    @KafkaListener(topics= "topic1")    // comment this line to stop kafka listening.
     public void getFromKafka(DataModel dataModel){
         /**
          * Kafka Listener to automatically print on terminal when a msg is published.

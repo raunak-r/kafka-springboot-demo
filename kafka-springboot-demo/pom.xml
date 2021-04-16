@@ -66,6 +66,12 @@
 			<version>2.9.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.github</groupId>
+			<artifactId>nifi-api-client-java</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
 
 	</dependencies>
 

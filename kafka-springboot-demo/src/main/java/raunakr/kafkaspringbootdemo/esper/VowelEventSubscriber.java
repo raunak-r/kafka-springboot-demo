@@ -30,23 +30,19 @@ public class VowelEventSubscriber implements EsperSubscriber {
      */
     public String getStatement() {
         // Example using 'Match Recognise' syntax.
-        String crtiticalEventExpression = "select * from DataModel";
+        String crtiticalEventExpression = "select * from DataModel ";
         return crtiticalEventExpression;
     }
 
     /**
      * Listener method called when Esper has detected a pattern match.
      */
-    public void update(Map<String, DataModel> eventMap) {
+    public void update(Map<String, DataModel> dataModelMap) {
 
 //        // 1st Temperature in the Critical Sequence
-//        DataModel temp1 = (TemperatureEvent) eventMap.get("temp1");
+        DataModel field1 = (DataModel) dataModelMap.get("field1");
 //        // 2nd Temperature in the Critical Sequence
-//        TemperatureEvent temp2 = (TemperatureEvent) eventMap.get("temp2");
-//        // 3rd Temperature in the Critical Sequence
-//        TemperatureEvent temp3 = (TemperatureEvent) eventMap.get("temp3");
-//        // 4th Temperature in the Critical Sequence
-//        TemperatureEvent temp4 = (TemperatureEvent) eventMap.get("temp4");
+        DataModel field2 = (DataModel) dataModelMap.get("field2");
 
         StringBuilder sb = new StringBuilder();
         sb.append("***************************************");
